@@ -7,17 +7,7 @@
 #include <math.h>
 //falta perlin
 using namespace std;
-void clearscreen()//codirobat per evitar flickers
-{
-	HANDLE hOut;
-	COORD Position;
 
-	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	Position.X = 0;
-	Position.Y = 0;
-	SetConsoleCursorPosition(hOut, Position);
-}
 void cleanMap(char map[100][100][100]) {
 	for (int i = 0; i < 100; i++) {
 		for (int j = 0; j < 100; j++) {
@@ -46,9 +36,9 @@ void saveMap(char map[100][100][100], int x, int y, int z) {
 	for (int i = 0; i < 100; i++) {
 		for (int j = 0; j < 100; j++) {
 			for (int k = 0; k < 100; k++) {
-				if ((int)map[i][j][k] != current) {
+				if ((int)map[k][j][i] != current) {
 					file << (int)current << ' ' << num << endl;
-					current = (int)map[i][j][k];
+					current = (int)map[k][j][i];
 					num = 1;
 				}
 				else num++;
@@ -74,9 +64,10 @@ int main() {
 					file.close();
 				}
 				else if (k == height) {
-					for (int l = 0; l < 100; l++) {
+					for (int n = 0; n < 100; n++) {
 						for (int m = 0; m < 100; m++) {
-							for (int n = 0; n < 100; n++) {
+							for (int l = 0; l < 100; l++)
+							{
 								file.open(filename);
 								if (n < 50) {
 									map[l][m][n] = 1;
